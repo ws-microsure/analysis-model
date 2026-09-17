@@ -91,7 +91,7 @@ class GrypeParserTest extends AbstractParserTest {
         var report = parse("grype-report-without-location.json");
 
         try (var softly = new SoftAssertions()) {
-            softly.assertThat(report).hasSize(2).hasDuplicatesSize(0);
+            softly.assertThat(report).hasSize(3).hasDuplicatesSize(0);
             softly.assertThat(report.get(0))
                     .hasFileName("-")
                     .hasPackageName("example-package 1.0.0")
@@ -106,6 +106,13 @@ class GrypeParserTest extends AbstractParserTest {
                     .hasCategory("deb")
                     .hasType("CVE-2026-0002")
                     .hasMessage("Example vulnerability with empty locations");
+            softly.assertThat(report.get(2))
+                    .hasFileName("/usr/lib/third-package")
+                    .hasPackageName("third-package 3.0.0")
+                    .hasSeverity(Severity.WARNING_HIGH)
+                    .hasCategory("deb")
+                    .hasType("CVE-2026-0003")
+                    .hasMessage("Example vulnerability with string locations");
         }
     }
 

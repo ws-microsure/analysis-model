@@ -51,7 +51,13 @@ public class GrypeParser extends JsonIssueParser {
         var artifact = match.getJSONObject(ARTIFACT_TAG);
         var locations = artifact.optJSONArray(LOCATIONS_TAG);
         if (locations != null && !locations.isEmpty()) {
-            issueBuilder.setFileName(locations.getJSONObject(0).getString(PATH_TAG));
+            var location = locations.get(0);
+            if (location instanceof JSONObject locationObject) {
+                issueBuilder.setFileName(locationObject.getString(PATH_TAG));
+            }
+            else {
+                issueBuilder.setFileName(String.valueOf(location));
+            }
         }
         var packageName = artifact.optString(NAME_TAG, "Unknown");
         var version = artifact.optString(VERSION_TAG, "");

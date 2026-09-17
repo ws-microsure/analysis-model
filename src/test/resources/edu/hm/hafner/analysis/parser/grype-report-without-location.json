@@ -29,6 +29,21 @@
         "type": "deb",
         "locations": []
       }
+    },
+    {
+      "vulnerability": {
+        "id": "CVE-2026-0003",
+        "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2026-0003",
+        "severity": "High",
+        "description": "Example vulnerability with string locations"
+      },
+      "artifact": {
+        "id": "fedcba0987654321",
+        "name": "third-package",
+        "version": "3.0.0",
+        "type": "deb",
+        "locations": ["/usr/lib/third-package"]
+      }
     }
   ]
 }
